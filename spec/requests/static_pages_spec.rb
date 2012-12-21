@@ -5,12 +5,18 @@ describe "StaticPages" do
     it "should have the content 'Sample app'" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       visit '/static_pages/home'
-      pages.should have_content('Sample App')
+      pages.should have_selector('h1', :test => 'Sample App')
 
        it "should have the right title"
   visit '/static_pages/home'
   pages.should have_selector( 'title', :text => "Ruby on rails tutorial Sample App | Home ")
     end
+    it "should not have a custome page title" do
+    	visit '/static_pages/home'
+    	page.should_not have_selector('title',
+    		:text => '| Home')
+    end
+    
   end
 
   describe "Help page" do
